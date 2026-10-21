@@ -23,5 +23,10 @@
     "name": "🔧 Wartung",
     "color": "ededed",
     "description": "Pflege und Automatik: Versions-Updates, Bots, Umbenennungen, Doku"
+  },
+  {
+    "name": "🚧 Überarbeiten",
+    "color": "f9d0c4",
+    "description": "Muss grundlegend überarbeitet werden, bevor es weitergeht – nicht mergen"
   }
 ]
