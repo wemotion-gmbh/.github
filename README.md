@@ -18,12 +18,16 @@ Jeder PR bekommt genau eins dieser Labels:
 | 🧩 Teilschritt | Teil eines Features oder einer Aufgabe | ausgeblendet |
 | ⏪ Rücksetzen | vorbereitet zum Zurückdrehen, nur im Notfall | ausgeblendet |
 | 🔧 Wartung | Versions-Updates, Bots, Umbenennungen, Doku | ausgeblendet |
+| 🚧 Überarbeiten | muss grundlegend überarbeitet werden, nicht mergen (statt eines anderen Labels, PR ist Entwurf) | ausgeblendet |
 
 Aufgaben werden nicht mit Labels gebündelt, sondern mit **GitHub Projects** der Org.
 Rechts im PR unter „Projects“ das passende Project wählen und dort das Feld
 „Aufgabe“ setzen. Ein Project kann mehrere Aufgaben enthalten.
 
 Entwürfe (Draft) brauchen kein Label – der Filter blendet sie ohnehin aus.
+
+Wartet ein PR (auf eine Entscheidung, einen anderen PR, ein Release-Fenster oder einen frischen Test),
+wird er zum Entwurf: `gh pr ready <nr> --undo`. Sobald er wirklich bereit ist: `gh pr ready <nr>` und ✅ setzen.
 
 ## Review-Filter
 
