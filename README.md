@@ -19,8 +19,9 @@ Jeder PR bekommt genau eins dieser Labels:
 | ⏪ Rücksetzen | vorbereitet zum Zurückdrehen, nur im Notfall | ausgeblendet |
 | 🔧 Wartung | Versions-Updates, Bots, Umbenennungen, Doku | ausgeblendet |
 
-Dazu optional **📁 &lt;aufgabe&gt;**: fasst alle PRs einer Aufgabe über alle Repos
-zusammen. Das Label wird beim ersten PR einer Aufgabe angelegt.
+Aufgaben werden nicht mit Labels gebündelt, sondern mit **GitHub Projects** der Org.
+Rechts im PR unter „Projects“ das passende Project wählen und dort das Feld
+„Aufgabe“ setzen. Ein Project kann mehrere Aufgaben enthalten.
 
 Entwürfe (Draft) brauchen kein Label – der Filter blendet sie ohnehin aus.
 
@@ -30,13 +31,13 @@ Alle offenen PRs, die ein Mensch ansehen soll, über alle Repos:
 
 https://github.com/pulls?q=is%3Apr%20is%3Aopen%20draft%3Afalse%20org%3Awemotion-gmbh%20label%3A%22%E2%9C%85%20Bereit%20zum%20Review%22%2C%22%F0%9F%9A%91%20Hotfix%22
 
-Alle PRs einer Aufgabe: dieselbe Suche mit `label:"📁 <aufgabe>"`.
+Alle PRs einer Aufgabe: im jeweiligen Project nach dem Feld „Aufgabe“ gruppieren oder filtern.
 
 ## Für Agenten
 
 PRs gleich mit Labels anlegen, zum Beispiel:
 
 ```
-gh label create "📁 <aufgabe>" -R <org>/<repo> --color 1d76db 2>/dev/null || true
-gh pr create ... --label "🧩 Teilschritt" --label "📁 <aufgabe>"
+gh pr create ... --label "🧩 Teilschritt"
+gh project item-add <project-nummer> --owner <org> --url <pr-url>
 ```
