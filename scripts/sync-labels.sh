@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # Creates or updates the labels from labels.json in every active, non-archived
 # repository of the organization. Safe to run again; existing labels with
-# other names are left alone. Task labels ("📁 <task>") are created on demand
-# by whoever opens the first PR of a task: gh label create "📁 <task>" --color 1d76db.
+# other names are left alone. Tasks are grouped with GitHub Projects, not labels.
 #
 # Usage: scripts/sync-labels.sh [repo ...]   (default: all repos pushed in the last 90 days)
 set -euo pipefail
