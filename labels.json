@@ -1,0 +1,8 @@
+[
+  {"name": "kind/feature",  "color": "0e8a16", "description": "A finished change, ready for review"},
+  {"name": "kind/part",     "color": "cfd3d7", "description": "One step of a larger task; not reviewed on its own"},
+  {"name": "kind/fallback", "color": "fbca04", "description": "A prepared revert; merge only in an emergency"},
+  {"name": "kind/release",  "color": "5319e7", "description": "Beta to live, or a hotfix for live"},
+  {"name": "kind/chore",    "color": "ededed", "description": "Maintenance or automation (version pins, bots, docs)"},
+  {"name": "ai",            "color": "c5def5", "description": "Written by an AI agent"}
+]
