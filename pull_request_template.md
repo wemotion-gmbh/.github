@@ -13,8 +13,7 @@
 - [ ] 🔧 Wartung – Versions-Updates, Bots, Umbenennungen, Doku
 
 ## Aufgabe
-<!-- Zu welcher Aufgabe gehört der PR? Daraus wird das Label „📁 <aufgabe>“. Leer lassen, wenn keine. -->
-Aufgabe:
+<!-- Gehört der PR zu einer größeren Aufgabe? Dann rechts unter „Projects“ das passende GitHub Project wählen und dort das Feld „Aufgabe“ setzen. Dafür gibt es kein Label. -->
 
 ## Tests
 <!-- Was hast du ausgeführt, und mit welchem Ergebnis? -->
