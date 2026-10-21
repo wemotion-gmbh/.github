@@ -1,23 +1,23 @@
-## Goal
-<!-- What should be better after this PR? One or two sentences. -->
+## Ziel
+<!-- Was soll nach diesem PR besser sein? Ein, zwei Sätze. -->
 
-## Effect
-<!-- What changes for users, clients or operations, and what stays the same? -->
+## Wirkung
+<!-- Was ändert sich für Nutzer, Kunden oder den Betrieb – und was bleibt gleich? -->
 
-## Kind
-<!-- Tick exactly one. It sets the label kind/<x>, which decides who sees this PR in the review filter. -->
-- [ ] feature: a finished change, ready for review
-- [ ] part: one step of a larger task, not reviewed on its own
-- [ ] fallback: a prepared revert, merge only in an emergency
-- [ ] release: beta to live, or a hotfix for live
-- [ ] chore: maintenance or automation (version pins, bots, docs)
+## Art
+<!-- Genau eins ankreuzen. Daraus wird das Label, und das entscheidet, ob der PR im Review-Filter erscheint. -->
+- [ ] ✅ Bereit zum Review – fertiges Feature oder fertiger Fix
+- [ ] 🧩 Teilschritt – Teil eines Features oder einer Aufgabe
+- [ ] ⏪ Rücksetzen – vorbereitet zum Zurückdrehen, nur im Notfall
+- [ ] 🚑 Hotfix – dringender Fix direkt für live
+- [ ] 🔧 Wartung – Versions-Updates, Bots, Umbenennungen, Doku
 
-## Task
-<!-- The task this PR belongs to (for agents: the task folder name). Sets the label task/<name>. Leave empty if none. -->
-Task:
+## Aufgabe
+<!-- Zu welcher Aufgabe gehört der PR? Daraus wird das Label „📁 <aufgabe>“. Leer lassen, wenn keine. -->
+Aufgabe:
 
 ## Tests
-<!-- What did you run, and what was the result? -->
+<!-- Was hast du ausgeführt, und mit welchem Ergebnis? -->
 
-## Merge notes
-<!-- Order, time windows, restarts, what to watch after the merge. -->
+## Hinweise zum Merge
+<!-- Reihenfolge, Zeitfenster, Neustarts, worauf man danach achten sollte. -->

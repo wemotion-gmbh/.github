@@ -1,44 +1,42 @@
-# Organization defaults
+# Vorgaben für die Organisation
 
-This repository holds the defaults for all repositories of the organization.
-It has to be public for GitHub to apply them; it contains no code and no secrets.
+Dieses Repo enthält die gemeinsamen Vorgaben für alle Repos der Organisation.
+Damit GitHub sie anwendet, muss es öffentlich sein. Es enthält keinen Code und
+keine Geheimnisse.
 
-- `pull_request_template.md`: the pull request template for every repository
-  that has no template of its own.
-- `labels.json` and `scripts/sync-labels.sh`: the shared pull request labels.
+- `pull_request_template.md`: die PR-Vorlage für jedes Repo ohne eigene Vorlage.
+- `labels.json` und `scripts/sync-labels.sh`: die gemeinsamen PR-Labels.
 
-## Pull request labels
+## PR-Labels
 
-Every pull request gets exactly one `kind/*` label:
+Jeder PR bekommt genau eins dieser Labels:
 
-| Label | Meaning | In the review filter |
+| Label | Bedeutung | im Review-Filter |
 |---|---|---|
-| `kind/feature` | a finished change, ready for review | shown |
-| `kind/release` | beta to live, or a hotfix for live | shown |
-| `kind/part` | one step of a larger task | hidden |
-| `kind/fallback` | a prepared revert, merge only in an emergency | hidden |
-| `kind/chore` | maintenance or automation | hidden |
+| ✅ Bereit zum Review | fertiges Feature oder fertiger Fix | sichtbar |
+| 🚑 Hotfix | dringender Fix direkt für live | sichtbar |
+| 🧩 Teilschritt | Teil eines Features oder einer Aufgabe | ausgeblendet |
+| ⏪ Rücksetzen | vorbereitet zum Zurückdrehen, nur im Notfall | ausgeblendet |
+| 🔧 Wartung | Versions-Updates, Bots, Umbenennungen, Doku | ausgeblendet |
 
-`task/<name>` groups the pull requests of one task across repositories.
-`ai` marks a pull request written by an AI agent.
+Dazu optional **📁 &lt;aufgabe&gt;**: fasst alle PRs einer Aufgabe über alle Repos
+zusammen. Das Label wird beim ersten PR einer Aufgabe angelegt.
 
-A pull request without a `kind/*` label stays visible in the review filter.
+Entwürfe (Draft) brauchen kein Label – der Filter blendet sie ohnehin aus.
 
-## Review filter
+## Review-Filter
 
-All open pull requests that need a human, across the organization (drafts hidden):
+Alle offenen PRs, die ein Mensch ansehen soll, über alle Repos:
 
-https://github.com/pulls?q=is%3Apr+is%3Aopen+draft%3Afalse+org%3Awemotion-gmbh+-label%3Akind%2Fpart+-label%3Akind%2Ffallback+-label%3Akind%2Fchore
+https://github.com/pulls?q=is%3Apr%20is%3Aopen%20draft%3Afalse%20org%3Awemotion-gmbh%20label%3A%22%E2%9C%85%20Bereit%20zum%20Review%22%2C%22%F0%9F%9A%91%20Hotfix%22
 
-One task across all repositories: the same link with `label:task/<name>`:
+Alle PRs einer Aufgabe: dieselbe Suche mit `label:"📁 <aufgabe>"`.
 
-https://github.com/pulls?q=is%3Apr+org%3Awemotion-gmbh+label%3Atask%2F<name>
+## Für Agenten
 
-## For agents
-
-Open a pull request with its labels set from the start, for example:
+PRs gleich mit Labels anlegen, zum Beispiel:
 
 ```
-gh label create "task/<task>" -R <org>/<repo> --color 1d76db 2>/dev/null || true
-gh pr create ... --label kind/part --label task/<task> --label ai
+gh label create "📁 <aufgabe>" -R <org>/<repo> --color 1d76db 2>/dev/null || true
+gh pr create ... --label "🧩 Teilschritt" --label "📁 <aufgabe>"
 ```
