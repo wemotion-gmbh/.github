@@ -45,8 +45,8 @@ Die PR-Regeln selbst stehen im Repo [pr-regeln](https://github.com/wemotion-gmbh
 
 **Abgeschafft** sind ✅ Bereit zum Review, 🚧 Überarbeiten und ⛔ Nicht mergen. An neuen PRs sind sie ein Fehler.
 Bei PRs, die vor dem Stichtag T1 angelegt wurden, zählen sie noch bis zum Stichtag T2. `labels.json` enthält sie
-nicht mehr: Der Abgleich legt sie nicht neu an und lässt vorhandene stehen. Nach T2 löscht
-`scripts/sync-labels.sh --delete-retired` sie aus allen Repos.
+nicht mehr: Der Abgleich legt sie nicht neu an und lässt vorhandene stehen. Nach T2 löscht der Löschlauf sie
+aus allen Repos (siehe „Labels abgleichen“).
 
 Aufgaben werden nicht mit Labels gebündelt, sondern mit **GitHub Projects** der Org.
 Rechts im PR unter „Projects“ das passende Project wählen und dort das Feld
@@ -55,16 +55,22 @@ Rechts im PR unter „Projects“ das passende Project wählen und dort das Feld
 ## Labels abgleichen
 
 ```
-scripts/sync-labels.sh [repo ...]                    legt die Labels aus labels.json an oder aktualisiert sie
-scripts/sync-labels.sh --delete-retired [repo ...]   löscht die abgeschafften Labels (erst nach T2)
+scripts/sync-labels.sh [repo ...]                                  legt die Labels aus labels.json an oder aktualisiert sie
+T2_PASSED=yes scripts/sync-labels.sh --delete-retired [repo ...]   löscht die abgeschafften Labels (erst nach T2)
 ```
 
-Ohne Repo-Namen gilt es für alle Repos, die in den letzten 90 Tagen einen Push hatten. Nötig sind `gh` und für
-den Abgleich `jq`.
+Ohne Repo-Namen gilt der Abgleich für alle Repos, die in den letzten 90 Tagen einen Push hatten, und der Löschlauf
+für alle Repos, die nicht archiviert sind. Nötig sind `gh` und für den Abgleich `node`.
+
+Der Löschlauf braucht `T2_PASSED=yes`. Ohne diese Bestätigung endet er mit Exit 2, bevor er etwas ändert. Vor T2
+würde er ✅ an PRs löschen, die nach dem alten Weg damit bereit sind. Die Bestätigung bleibt auch nach T2 nötig.
 Trägt ein offener PR noch ⛔ oder 🚧, bleibt das Label in diesem Repo stehen. Das Skript nennt dann die PRs und
 endet mit Exit 3. Dann den Stopp als `Merge-Stopp:`-Zeile in den PR-Text übernehmen, das Label vom PR nehmen und
-das Skript noch einmal ausführen. ✅ wird immer gelöscht, es hält nichts an. Exit 1 heißt: Der Lauf ist
-abgebrochen, etwa weil `gh` einen Fehler gemeldet hat.
+das Skript noch einmal ausführen. ✅ wird immer gelöscht, es hält nichts an. Jeder andere Code als 0 und 3 heißt:
+Der Lauf ist abgebrochen, etwa weil `gh` nicht angemeldet ist oder einen Fehler gemeldet hat. Ein zweiter Lauf
+löscht dann nur den Rest.
+
+`scripts/test/sync-labels-test.sh` prüft das Skript mit einem Ersatz für `gh` und ändert nichts auf GitHub.
 
 ## Review-Filter
 
