@@ -1,10 +1,5 @@
 [
   {
-    "name": "✅ Bereit zum Review",
-    "color": "0e8a16",
-    "description": "Fertiges Feature oder fertiger Fix – bitte reviewen"
-  },
-  {
     "name": "🚑 Hotfix",
     "color": "d93f0b",
     "description": "Dringender Fix direkt für live"
@@ -23,11 +18,6 @@
     "name": "🔧 Wartung",
     "color": "ededed",
     "description": "Pflege und Automatik: Versions-Updates, Bots, Umbenennungen, Doku"
-  },
-  {
-    "name": "🚧 Überarbeiten",
-    "color": "f9d0c4",
-    "description": "Muss grundlegend überarbeitet werden, bevor es weitergeht – nicht mergen"
   },
   {
     "name": "🔑 Marcs Ja fehlt",
