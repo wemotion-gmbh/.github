@@ -28,5 +28,15 @@
     "name": "🚧 Überarbeiten",
     "color": "f9d0c4",
     "description": "Muss grundlegend überarbeitet werden, bevor es weitergeht – nicht mergen"
+  },
+  {
+    "name": "🔑 Marcs Ja fehlt",
+    "color": "b60205",
+    "description": "Eine Migration löscht Daten – wartet auf Marcs Ja im Cockpit"
+  },
+  {
+    "name": "🔑 Marcs Ja",
+    "color": "0e8a16",
+    "description": "Marc hat die löschende Migration freigegeben – setzt nur die KI nach seinem Ja"
   }
 ]
