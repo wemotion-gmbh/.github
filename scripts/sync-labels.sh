@@ -3,8 +3,11 @@
 # repository of the organization. Safe to run again; existing labels with
 # other names are left alone. Tasks are grouped with GitHub Projects, not labels.
 #
-# With --delete-retired it deletes the retired labels instead (only after T2 of
-# the PR rules; take them out of labels.json first, or the next sync brings them back).
+# The retired labels are not in labels.json, so a sync never creates them and
+# leaves existing ones alone. With --delete-retired it deletes them instead (only
+# after T2 of the PR rules). A retired label that an open PR still carries is kept
+# and reported, so a stop set only as a label never disappears silently; the run
+# then exits with 1.
 #
 # Usage: scripts/sync-labels.sh [--delete-retired] [repo ...]   (default: all repos pushed in the last 90 days)
 set -euo pipefail
@@ -27,11 +30,18 @@ else
     -q ".[] | select(.isArchived | not) | select(.pushedAt > \"$since\") | .name")"
 fi
 
+kept=0
 for repo in $repos; do
   if [ "$mode" = delete ]; then
     existing="$(gh label list -R "$ORG/$repo" --limit 500 --json name -q '.[].name')"
     for name in "${retired[@]}"; do
       if grep -Fxq -- "$name" <<<"$existing"; then
+        open="$(gh pr list -R "$ORG/$repo" --label "$name" --state open --limit 500 --json number -q '.[].number' | tr '\n' ' ')"
+        if [ -n "$open" ]; then
+          echo "label kept: $repo $name (open PRs: $open)"
+          kept=1
+          continue
+        fi
         gh label delete "$name" -R "$ORG/$repo" --yes >/dev/null
         echo "label deleted: $repo $name"
       fi
@@ -44,3 +54,4 @@ for repo in $repos; do
   done
   echo "labels synced: $repo"
 done
+exit "$kept"
