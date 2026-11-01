@@ -5,9 +5,9 @@
 #
 # The retired labels are not in labels.json, so a sync never creates them and
 # leaves existing ones alone. With --delete-retired it deletes them instead (only
-# after T2 of the PR rules). A retired label that an open PR still carries is kept
-# and reported, so a stop set only as a label never disappears silently; the run
-# then exits with 1.
+# after T2 of the PR rules). A retired stop label that an open PR still carries is
+# kept and reported, so a stop set only as a label never disappears silently; the
+# run then exits with 3. Exit 1 means the run was aborted, for example by a gh error.
 #
 # Usage: scripts/sync-labels.sh [--delete-retired] [repo ...]   (default: all repos pushed in the last 90 days)
 set -euo pipefail
@@ -15,6 +15,8 @@ ORG="${ORG:-wemotion-gmbh}"
 here="$(cd "$(dirname "$0")/.." && pwd)"
 labels="$here/labels.json"
 retired=("✅ Bereit zum Review" "🚧 Überarbeiten" "⛔ Nicht mergen")
+# Retired labels that stop a merge; the ready label stops nothing and is always deleted.
+stops=("🚧 Überarbeiten" "⛔ Nicht mergen")
 
 mode=sync
 if [ "${1:-}" = "--delete-retired" ]; then
@@ -36,10 +38,19 @@ for repo in $repos; do
     existing="$(gh label list -R "$ORG/$repo" --limit 500 --json name -q '.[].name')"
     for name in "${retired[@]}"; do
       if grep -Fxq -- "$name" <<<"$existing"; then
-        open="$(gh pr list -R "$ORG/$repo" --label "$name" --state open --limit 500 --json number -q '.[].number' | tr '\n' ' ')"
+        open=""
+        stop=no
+        for s in "${stops[@]}"; do
+          if [ "$s" = "$name" ]; then stop=yes; fi
+        done
+        if [ "$stop" = yes ]; then
+          # Filter the open PRs here instead of with --label, which goes through the search index and can lag behind.
+          open="$(gh pr list -R "$ORG/$repo" --state open --limit 500 --json number,labels \
+            -q "[.[] | select(any(.labels[]; .name == \"$name\")) | .number | tostring] | join(\" \")")"
+        fi
         if [ -n "$open" ]; then
           echo "label kept: $repo $name (open PRs: $open)"
-          kept=1
+          kept=3
           continue
         fi
         gh label delete "$name" -R "$ORG/$repo" --yes >/dev/null

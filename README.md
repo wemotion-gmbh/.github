@@ -14,8 +14,9 @@ Die PR-Regeln selbst stehen im Repo [pr-regeln](https://github.com/wemotion-gmbh
 - **Bereit** heißt: kein Entwurf. Wer noch nicht fertig ist oder wartet, legt den PR als Entwurf an
   (`gh pr ready <nr> --undo`), und sobald er fertig ist: `gh pr ready <nr>`.
 - **Übergang:** Für PRs, die vor dem Stichtag T1 angelegt wurden (solange die Stichtage nicht gesetzt sind: für
-  alle), gilt bis zum Stichtag T2 auch der alte Weg. Bereit sind sie dann erst mit ✅ Bereit zum Review oder dem
-  Kommentar „bereit“, und die Labels ⛔ und 🚧 halten sie an.
+  alle), gilt bis zum Stichtag T2 auch der alte Weg. Bereit sind sie dann erst, wenn sie aus dem Entwurf genommen
+  wurden, ✅ Bereit zum Review tragen oder nach dem letzten Push den Kommentar „bereit“ haben. Die Labels ⛔ und 🚧
+  halten sie an.
 - **Kopfzeilen** ganz oben im PR-Text, am Zeilenanfang: `Merge-Stopp: <Grund>`, `Braucht: <repo>#<nr>`,
   `Paired-with: <repo> <https-Link>` (nur bei verschiedenen Branch-Namen), `Nach dem Merge: <Schritt>`.
   Jeder Stopp steht als `Merge-Stopp:`-Zeile, nie nur im Text. Trifft nichts zu, entfällt die Zeile.
@@ -58,9 +59,12 @@ scripts/sync-labels.sh [repo ...]                    legt die Labels aus labels.
 scripts/sync-labels.sh --delete-retired [repo ...]   löscht die abgeschafften Labels (erst nach T2)
 ```
 
-Ohne Repo-Namen gilt es für alle Repos, die in den letzten 90 Tagen einen Push hatten. Nötig sind `gh` und `jq`.
-Trägt ein offener PR noch ein abgeschafftes Label, bleibt es in diesem Repo stehen. Das Skript nennt dann die PRs
-und endet mit Exit 1.
+Ohne Repo-Namen gilt es für alle Repos, die in den letzten 90 Tagen einen Push hatten. Nötig sind `gh` und für
+den Abgleich `jq`.
+Trägt ein offener PR noch ⛔ oder 🚧, bleibt das Label in diesem Repo stehen. Das Skript nennt dann die PRs und
+endet mit Exit 3. Dann den Stopp als `Merge-Stopp:`-Zeile in den PR-Text übernehmen, das Label vom PR nehmen und
+das Skript noch einmal ausführen. ✅ wird immer gelöscht, es hält nichts an. Exit 1 heißt: Der Lauf ist
+abgebrochen, etwa weil `gh` einen Fehler gemeldet hat.
 
 ## Review-Filter
 
