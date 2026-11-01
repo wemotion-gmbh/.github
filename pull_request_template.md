@@ -1,22 +1,22 @@
-## Ziel
-<!-- Was soll nach diesem PR besser sein? Ein, zwei Sätze. -->
+<!--
+Stopp und Abhängigkeiten stehen als Kopfzeilen direkt unter diesem Kommentar, jede am Zeilenanfang und ohne
+Leerzeile zwischen ihnen. Eine Zeile je Punkt, nur was zutrifft:
 
-## Wirkung
-<!-- Was ändert sich für Nutzer, Kunden oder den Betrieb – und was bleibt gleich? -->
+  Merge-Stopp: <Grund>              wird erst gemergt, wenn die Zeile entfernt ist
+  Braucht: <repo>#<nr>              der genannte PR wird vorher gemergt, z. B. fusion-api-v3#<nr>
+  Paired-with: <repo> <https-Link>  Gegenstück in einem anderen Repo, nur bei anderem Branch-Namen
+  Nach dem Merge: <Schritt>         nur zur Information
 
-## Art
-<!-- Genau eins ankreuzen. Daraus wird das Label, und das entscheidet, ob der PR im Review-Filter erscheint. -->
-- [ ] ✅ Bereit zum Review – fertiges Feature oder fertiger Fix
-- [ ] 🧩 Teilschritt – Teil eines Features oder einer Aufgabe
-- [ ] ⏪ Rücksetzen – vorbereitet zum Zurückdrehen, nur im Notfall
-- [ ] 🚑 Hotfix – dringender Fix direkt für live
-- [ ] 🔧 Wartung – Versions-Updates, Bots, Umbenennungen, Doku
+Trifft nichts zu, entfällt die Zeile. „keiner“ oder „-“ ist ein Fehler.
+Noch nicht fertig? Dann als Entwurf anlegen. Kein Entwurf heißt: bereit.
+Das Art-Label kommt aus dem Branch-Namen <art>/<thema>. Die Regeln: https://github.com/wemotion-gmbh/pr-regeln
+-->
 
-## Aufgabe
-<!-- Gehört der PR zu einer größeren Aufgabe? Dann rechts unter „Projects“ das passende GitHub Project wählen und dort das Feld „Aufgabe“ setzen. Dafür gibt es kein Label. -->
+## Abhängigkeiten und Reihenfolge
+<!-- Was vorher oder zusammen gemergt werden muss, oder „Keine.“ -->
 
-## Tests
-<!-- Was hast du ausgeführt, und mit welchem Ergebnis? -->
+## Worum es geht
+<!-- Was ist nach diesem PR anders, und was ändert sich für Nutzer, Kunden oder den Betrieb? -->
 
-## Hinweise zum Merge
-<!-- Reihenfolge, Zeitfenster, Neustarts, worauf man danach achten sollte. -->
+## Bitte testen
+<!-- Was ein Mensch ausprobieren soll, und was dabei herauskommen muss. -->
