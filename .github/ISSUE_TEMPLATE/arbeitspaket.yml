@@ -1,0 +1,66 @@
+name: Arbeitspaket
+description: Eine Aufgabe, die unter einem Eltern-Issue hängt (der Normalfall).
+projects: ["wemotion-gmbh/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Erst suchen, dann anlegen: Gibt es das Issue schon, ergänze es.
+        Nach dem Anlegen: als Sub-Issue ans Eltern-Issue hängen, Blocker als Beziehung „Blocked by“ setzen und im Projekt Priorität und Aufwand eintragen.
+        Keine Zugangsdaten und keine Kundendaten, auch nicht in privaten Repos. Namen ohne @ schreiben.
+  - type: input
+    id: parent
+    attributes:
+      label: Eltern-Issue
+      description: Das tiefste Issue, zu dem die Arbeit gehört, als repo#nummer. Von unten nach oben suchen.
+      placeholder: repo#123
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Ziel
+      description: Was ist anders, wenn das Issue fertig ist? Ein bis zwei Sätze.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Umfang
+      description: Was gehört dazu, was nicht? Keine Häkchenliste mit Issue-Verweisen, der Stand steht in den Sub-Issues.
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blockiert durch
+      description: Issues, die vorher fertig sein müssen, als repo#nummer. Leer lassen, wenn es sofort beginnen kann.
+      placeholder: repo#120, repo#121
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorität
+      options:
+        - Hoch
+        - Normal
+        - Später
+      default: 1
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Aufwand
+      description: Eine Schätzung reicht.
+      options:
+        - 1 – Schalter oder Prüfung, unter einer Stunde
+        - 2 – kleiner PR
+        - 3 – normaler PR mit Tests, etwa ein Tag
+        - 4 – mehrere PRs oder Repos
+        - 5 – großes Vorhaben, besser in Sub-Issues teilen
+      default: 2
+    validations:
+      required: true
+  - type: textarea
+    id: test
+    attributes:
+      label: Bitte testen
+      description: Was ein Mensch am Ende ausprobieren soll, und was dabei herauskommen muss.

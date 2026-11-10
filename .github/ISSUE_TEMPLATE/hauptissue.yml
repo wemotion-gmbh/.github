@@ -1,0 +1,29 @@
+name: Hauptissue
+description: Nur für eine neue Aufgabe, die zu keinem bestehenden Hauptissue passt. Die Ausnahme, nicht der Normalfall.
+title: "<Name der Aufgabe> (Hauptissue)"
+projects: ["wemotion-gmbh/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ein Hauptissue hat kein Eltern-Issue und sammelt alle Issues einer Aufgabe als Sub-Issues.
+        Prüf vorher, ob die Arbeit unter ein bestehendes Hauptissue passt. Dann ist es ein Arbeitspaket.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Ziel
+      description: Wozu gibt es diese Aufgabe, und wann ist sie fertig?
+    validations:
+      required: true
+  - type: textarea
+    id: structure
+    attributes:
+      label: Aufbau
+      description: In welche Gruppen oder Etappen teilt sich die Arbeit? Die einzelnen Pakete werden Sub-Issues, keine Häkchenliste.
+  - type: checkboxes
+    id: checked
+    attributes:
+      label: Geprüft
+      options:
+        - label: Die Arbeit passt unter kein bestehendes Hauptissue.
+          required: true
