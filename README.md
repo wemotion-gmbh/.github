@@ -6,6 +6,8 @@ keine Geheimnisse.
 
 - `pull_request_template.md`: die PR-Vorlage für jedes Repo ohne eigene Vorlage.
 - `labels.json` und `scripts/sync-labels.sh`: die gemeinsamen PR-Labels.
+- `.github/ISSUE_TEMPLATE/`: die Issue-Vorlagen „Arbeitspaket“ und „Hauptissue“ für jedes Repo ohne eigene Vorlagen.
+  Leere Issues sind in der Web-Oberfläche abgeschaltet.
 
 Die PR-Regeln selbst stehen im Repo [pr-regeln](https://github.com/wemotion-gmbh/pr-regeln).
 
@@ -91,3 +93,12 @@ die Kopfzeilen, setzt das Art-Label und prüft den PR vor dem Anlegen. Ein Proje
 ```
 gh project item-add <project-nummer> --owner <org> --url <pr-url>
 ```
+
+## Issues in Kürze
+
+- Jedes Issue hängt als Sub-Issue unter einem Eltern-Issue. Nur ein Hauptissue hat keines; sein Titel endet auf
+  „(Hauptissue)“.
+- Einordnen von unten nach oben: zuerst das tiefste passende Sub-Issue suchen, dann Ebene für Ebene höher.
+- Was vorher fertig sein muss, steht als Beziehung „Blocked by“ am Issue, nicht nur im Text.
+- Jedes Arbeitspaket hat im Projekt eine Priorität (Hoch, Normal, Später) und einen Aufwand von 1 bis 5.
+- Die Vorlagen gelten in der Web-Oberfläche. Die KI legt Issues mit dem Plugin `issue-regeln` an.
