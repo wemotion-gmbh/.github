@@ -45,6 +45,13 @@ Die PR-Regeln selbst stehen im Repo [pr-regeln](https://github.com/wemotion-gmbh
 | 🔑 Marcs Ja fehlt | Eine Migration löscht Daten. Der PR wartet auf Marcs Ja im Cockpit. |
 | 🔑 Marcs Ja | Marc hat zugestimmt. Dieses Label setzt die KI nur nach Marcs Ja im Cockpit. |
 
+**Neue UI-Muster im Hub** (`canou-hub`, Kopfzeile `Design: neu – …`) brauchen Marcs Design-Ja:
+
+| Label | Bedeutung |
+|---|---|
+| 🎨 Marcs Design-Ja fehlt | Der PR bringt ein neues UI-Muster. Er wartet auf Marcs Design-Ja im Cockpit. |
+| 🎨 Marcs Design-Ja | Marc hat das Muster freigegeben. Dieses Label setzt die KI nur nach Marcs Ja im Cockpit, mit einem Vermerk samt Head. Ändern sich danach UI-Dateien, gilt es nicht mehr. |
+
 **Abgeschafft** sind ✅ Bereit zum Review, 🚧 Überarbeiten und ⛔ Nicht mergen. An neuen PRs sind sie ein Fehler.
 Bei PRs, die vor dem Stichtag T1 angelegt wurden, zählen sie noch bis zum Stichtag T2. `labels.json` enthält sie
 nicht mehr: Der Abgleich legt sie nicht neu an und lässt vorhandene stehen. Nach T2 löscht der Löschlauf sie

@@ -113,10 +113,11 @@ expect "repo without recent pushes covered" deleted "oldie 🚧 Überarbeiten"
 start "sync without repo names"
 run
 expect "exit 0" [ "$code" = 0 ]
-expect "six labels created" [ "$(grep -c '^label create .* -R x/alpha --force ' "$stub/calls")" = 6 ]
+expect "eight labels created" [ "$(grep -c '^label create .* -R x/alpha --force ' "$stub/calls")" = 8 ]
 expect "repo without recent pushes left alone" not grep -q "x/oldie" "$stub/calls"
 expect "no retired label created" not grep -q -e "^label create ✅" -e "^label create 🚧" -e "^label create ⛔" "$stub/calls"
 expect "name, color and description passed" grep -Fxq "label create 🔑 Marcs Ja fehlt -R x/alpha --force --color b60205 --description Eine Migration löscht Daten – wartet auf Marcs Ja im Cockpit" "$stub/calls"
+expect "design label passed" grep -Fxq "label create 🎨 Marcs Design-Ja fehlt -R x/alpha --force --color b60205 --description Ein neues UI-Muster – wartet auf Marcs Design-Ja im Cockpit" "$stub/calls"
 expect "reported" grep -Fxq "labels synced: alpha" <<<"$out"
 
 exit "$failed"

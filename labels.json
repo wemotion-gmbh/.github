@@ -28,5 +28,15 @@
     "name": "🔑 Marcs Ja",
     "color": "0e8a16",
     "description": "Marc hat die löschende Migration freigegeben – setzt nur die KI nach seinem Ja"
+  },
+  {
+    "name": "🎨 Marcs Design-Ja fehlt",
+    "color": "b60205",
+    "description": "Ein neues UI-Muster – wartet auf Marcs Design-Ja im Cockpit"
+  },
+  {
+    "name": "🎨 Marcs Design-Ja",
+    "color": "0e8a16",
+    "description": "Marc hat das neue Muster freigegeben – setzt nur die KI nach seinem Ja"
   }
 ]
